@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>💊 Health Recommendations</h2>
+        <p>Suggested next steps based on your predicted condition</p>
+    </div>
+
+    {% if disease %}
+        <div style="margin-bottom: 20px;">
+            <h3 style="margin-bottom: 4px;">Predicted Condition: <span style="color: var(--primary);">{{ disease }}</span></h3>
+            <p style="color: var(--text-light); font-size: 0.9rem;">Confidence: {{ confidence }}%</p>
+        </div>
+
+        <div class="recommendation-section">
+            <h3>🏠 Home Care</h3>
+            <ul class="recommendation-list">
+                {% if recommendations.home_care %}
+                    {% for item in recommendations.home_care %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Rest and stay hydrated</li>
+                    <li>Monitor your symptoms</li>
+                    <li>Get adequate sleep</li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="recommendation-section">
+            <h3>💊 Over-the-Counter Advice</h3>
+            <ul class="recommendation-list">
+                {% if recommendations.otc %}
+                    {% for item in recommendations.otc %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Consult a pharmacist for appropriate OTC medications</li>
+                    <li>Do not self-prescribe antibiotics</li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="recommendation-section">
+            <h3>🏥 When to See a Doctor</h3>
+            <ul class="recommendation-list">
+                {% if recommendations.when_to_see_doctor %}
+                    {% for item in recommendations.when_to_see_doctor %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>If symptoms persist for more than 3-5 days</li>
+                    <li>If symptoms worsen or become severe</li>
+                    <li>If you develop new concerning symptoms</li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="consent-box" style="margin-top: 16px;">
+            <h3>⚠️ Important Notice</h3>
+            <p>
+                These recommendations are general guidelines for educational purposes. 
+                They do not replace professional medical advice. Always consult a healthcare provider.
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+            <a href="/chat" class="btn btn-primary">🔍 Check New Symptoms</a>
+            <a href="/results" class="btn btn-secondary">📊 View Detailed Results</a>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">💊</div>
+            <h3>No Recommendations Yet</h3>
+            <p>Please check your symptoms first to get personalized recommendations.</p>
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                <a href="/chat" class="btn btn-primary">💬 Check Symptoms</a>
+                <a href="/symptoms" class="btn btn-secondary">📋 Symptom Picker</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

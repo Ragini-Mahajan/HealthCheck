@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Symptom Picker - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>📋 Symptom Picker</h2>
+        <p>Select your symptoms by category. Click symptoms that apply to you, then click "Analyze Symptoms".</p>
+    </div>
+
+    <div class="symptom-categories">
+        <!-- General / Whole Body -->
+        <div class="symptom-category">
+            <h3>🌡 General / Whole Body</h3>
+            <div class="symptom-tags">
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'fever')">Fever</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'fatigue')">Fatigue</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'weight_loss')">Weight Loss</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'chills')">Chills</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'night_sweats')">Night Sweats</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'weakness')">Weakness</span>
+            </div>
+        </div>
+
+        <!-- Head & Face -->
+        <div class="symptom-category">
+            <h3>🤕 Head & Face</h3>
+            <div class="symptom-tags">
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'headache')">Headache</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'dizziness')">Dizziness</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'yellow_eyes')">Yellow Eyes</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'blurred_vision')">Blurred Vision</span>
+            </div>
+        </div>
+
+        <!-- Chest & Respiratory -->
+        <div class="symptom-category">
+            <h3>🫁 Chest & Respiratory</h3>
+            <div class="symptom-tags">
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'cough')">Cough</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'chest_pain')">Chest Pain</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'difficulty_breathing')">Difficulty Breathing</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'wheezing')">Wheezing</span>
+            </div>
+        </div>
+
+        <!-- Digestive System -->
+        <div class="symptom-category">
+            <h3>🤢 Digestive System</h3>
+            <div class="symptom-tags">
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'nausea')">Nausea</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'vomiting')">Vomiting</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'diarrhea')">Diarrhea</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'abdominal_pain')">Abdominal Pain</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'loss_of_appetite')">Loss of Appetite</span>
+            </div>
+        </div>
+
+        <!-- Muscles & Joints -->
+        <div class="symptom-category">
+            <h3>🦴 Muscles & Joints</h3>
+            <div class="symptom-tags">
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'joint_pain')">Joint Pain</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'muscle_pain')">Muscle Pain</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'back_pain')">Back Pain</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'neck_pain')">Neck Pain</span>
+            </div>
+        </div>
+
+        <!-- Skin -->
+        <div class="symptom-category">
+            <h3>🔴 Skin</h3>
+            <div class="symptom-tags">
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'skin_rash')">Skin Rash</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'itching')">Itching</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'yellow_skin')">Yellow Skin</span>
+                <span class="symptom-tag" onclick="toggleSymptom(this, 'skin_ulcers')">Skin Ulcers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Selected Symptoms Bar -->
+    <div class="selected-symptoms-bar" id="selected-symptoms">
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Click symptoms above to select them...</span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="analyzeSelectedSymptoms()">
+            🔍 Analyze Selected Symptoms
+        </button>
+        <button class="btn btn-secondary" onclick="selectedSymptoms.clear(); updateSelectedBar();">
+            Clear All
+        </button>
+        <a href="/chat" class="btn btn-secondary">💬 Use Chat Instead</a>
+    </div>
+</div>
+{% endblock %}
+

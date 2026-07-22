@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="card">
+        <div class="welcome-icon">🩺</div>
+        <h1>Welcome to HealthCheck AI</h1>
+        <p>
+            An intelligent symptom analysis tool powered by Machine Learning. 
+            Describe your symptoms and get instant insights about possible conditions.
+        </p>
+        
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
+            <a href="/chat" class="btn btn-primary">Start Chat Consultation</a>
+            <a href="/symptoms" class="btn btn-secondary">Browse Symptom Picker</a>
+            <a href="/about" class="btn btn-secondary">How It Works</a>
+        </div>
+
+        <div class="consent-box">
+            <h3>📋 Important Disclaimer — Please Read</h3>
+            <p>
+                By using this tool, you acknowledge and agree that:
+            </p>
+            <ul>
+                <li>This is a <strong>demonstration project</strong> for educational purposes only</li>
+                <li>The predictions are based on a limited dataset and ML model trained on symptom-disease relationships</li>
+                <li>This tool is <strong>NOT a substitute</strong> for professional medical advice, diagnosis, or treatment</li>
+                <li>You should <strong>always consult</strong> a qualified healthcare provider for any health concerns</li>
+                <li>In case of emergency, call your local emergency services immediately</li>
+                <li>Your symptom data is stored locally in your browser session and not sent to external servers</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="/chat" class="btn btn-primary btn-block" style="max-width: 400px; margin: 0 auto;">
+                I Understand — Start Using HealthCheck →
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Info Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px;">
+        <div class="card" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🤖</div>
+            <h3>AI-Powered</h3>
+            <p style="font-size: 0.9rem; color: var(--text-light);">Three ML models work together for accurate predictions</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            <h3>Symptom Check</h3>
+            <p style="font-size: 0.9rem; color: var(--text-light);">Type symptoms naturally or pick from our symptom list</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">📊</div>
+            <h3>Instant Results</h3>
+            <p style="font-size: 0.9rem; color: var(--text-light);">Get confidence-based predictions and recommendations</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

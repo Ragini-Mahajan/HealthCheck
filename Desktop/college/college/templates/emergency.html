@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Emergency - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card" style="border: 3px solid var(--danger); background: #fff5f5;">
+    <div class="emergency-page">
+        <div class="emergency-icon-lg">🚨</div>
+        <h1>Medical Emergency Detected</h1>
+        <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 8px;">
+            Based on the symptoms you've described, <strong>please seek emergency medical attention immediately.</strong>
+        </p>
+        
+        <div class="emergency-number">
+            🆘 911 / 108
+        </div>
+        
+        <p style="color: var(--text-light); margin-bottom: 20px;">
+            Call your local emergency services right away.
+        </p>
+
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <a href="tel:911" class="btn btn-danger" style="font-size: 1.1rem; padding: 14px 32px;">
+                📞 Call 911 Now
+            </a>
+            <a href="/chat" class="btn btn-secondary">
+                ← Back to Symptom Checker
+            </a>
+        </div>
+
+        <div class="consent-box" style="margin-top: 24px; text-align: left; background: #fff; border-color: var(--danger);">
+            <h3>🆘 While Waiting for Help</h3>
+            <ul>
+                <li>Stay calm and try to keep the person comfortable</li>
+                <li>Do not give anything to eat or drink unless instructed</li>
+                <li>Loosen any tight clothing</li>
+                <li>If possible, have someone stay with the person at all times</li>
+                <li>Be ready to provide information about any medications they're taking</li>
+                <li>Do not drive yourself to the hospital if experiencing severe symptoms — call an ambulance</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

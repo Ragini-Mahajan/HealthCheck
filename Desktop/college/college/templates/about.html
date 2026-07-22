@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}About - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>ℹ️ About HealthCheck AI</h2>
+        <p>Understanding how this tool works, its capabilities, and limitations</p>
+    </div>
+
+    <!-- How It Works -->
+    <div class="about-section">
+        <h2>⚙️ How It Works</h2>
+        <p>
+            HealthCheck AI uses a <strong>Machine Learning ensemble</strong> of three different algorithms to analyze 
+            symptom patterns and predict possible health conditions. When you enter your symptoms, the system:
+        </p>
+        <ol style="padding-left: 20px; margin-top: 10px;">
+            <li><strong>Parses</strong> your symptom descriptions using natural language matching</li>
+            <li><strong>Builds</strong> a feature vector from the recognized symptoms</li>
+            <li><strong>Runs</strong> the features through three different ML models</li>
+            <li><strong>Averages</strong> the predictions with confidence scores</li>
+            <li><strong>Presents</strong> the top most likely conditions</li>
+        </ol>
+    </div>
+
+    <!-- Models Used -->
+    <div class="about-section">
+        <h2>🧠 Machine Learning Models</h2>
+        <p>Three different algorithms are used in an ensemble to improve accuracy:</p>
+        <div style="margin-top: 12px;">
+            <span class="model-badge">🌳 Random Forest Classifier</span>
+            <span class="model-badge">📊 Gaussian Naive Bayes</span>
+            <span class="model-badge">⚡ Support Vector Machine (SVM)</span>
+        </div>
+        <p style="margin-top: 12px;">
+            The ensemble approach helps balance the strengths of each model — Random Forest handles complex 
+            relationships, Naive Bayes works well with probabilistic patterns, and SVM finds optimal decision 
+            boundaries between different conditions.
+        </p>
+    </div>
+
+    <!-- Dataset -->
+    <div class="about-section">
+        <h2>📊 Training Data</h2>
+        <p>
+            The model was trained on a curated dataset containing symptom-disease relationships for 
+            <strong>{{ num_diseases }} different conditions</strong> and {{ num_symptoms }} key symptoms including:
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+            {% for symptom in symptoms_list %}
+                <span class="symptom-tag" style="cursor: default;">{{ symptom.replace('_', ' ') }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Accuracy -->
+    <div class="about-section">
+        <h2>📈 Model Performance</h2>
+        <p>Individual model accuracy on test data:</p>
+        <div style="margin-top: 12px;">
+            {% if accuracy %}
+                {% for model_name, acc in accuracy.items() %}
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px;">
+                            <span>
+                                {% if model_name == 'rf' %}🌳 Random Forest
+                                {% elif model_name == 'nb' %}📊 Naive Bayes
+                                {% elif model_name == 'svm' %}⚡ SVM
+                                {% endif %}
+                            </span>
+                            <span style="font-weight: 600;">{{ (acc * 100)|round(1) }}%</span>
+                        </div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: {{ acc * 100 }}%;"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Limitations -->
+    <div class="about-section">
+        <h2>⚠️ Limitations & Disclaimer</h2>
+        <div class="consent-box" style="margin-top: 8px;">
+            <ul>
+                <li>This is a <strong>college demonstration project</strong> and not a certified medical device</li>
+                <li>The model is trained on a limited dataset ({{ num_diseases }} conditions, 10 symptoms)</li>
+                <li>Symptoms like chest pain, difficulty breathing may indicate emergencies — seek real medical help</li>
+                <li>Free-text symptom parsing may not capture all symptoms accurately</li>
+                <li>The tool does not account for medical history, medications, or test results</li>
+                <li><strong>Always consult a qualified healthcare professional</strong> for medical advice</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="about-section">
+        <h2>🎯 Intended Use</h2>
+        <p>
+            This tool is designed for:
+        </p>
+        <ul style="padding-left: 20px; margin-top: 8px;">
+            <li><strong>Educational purposes</strong> — understanding how ML can be applied in healthcare</li>
+            <li><strong>Health awareness</strong> — learning about symptom-disease relationships</li>
+            <li><strong>College project presentation</strong> — demonstrating AI/ML concepts</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="/welcome" class="btn btn-primary">← Back to Home</a>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Symptom Chat - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card" style="padding: 0; overflow: hidden;">
+    <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, #f0f4ff, #e8f0fe);">
+        <h2 style="font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+            💬 Symptom Checker Chat
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-light);">
+            Describe your symptoms in plain language. For example: "I have fever, headache, and fatigue"
+        </p>
+    </div>
+
+    <div class="chat-container">
+        <div id="chat-messages" class="chat-messages">
+            <div class="chat-message bot">
+                <p>👋 Hello! I'm your HealthCheck AI assistant. Please describe your symptoms below.</p>
+                <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.8;">
+                    Try saying: <em>"I have fever and headache"</em> or click a quick reply below.
+                </p>
+                <div class="message-time">just now</div>
+            </div>
+            <div id="typing-indicator" class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Quick Reply Buttons -->
+        <div class="quick-replies" id="quick-replies">
+            <button class="quick-reply-btn" onclick="addQuickReply('I have fever and headache')">🤒 Fever & Headache</button>
+            <button class="quick-reply-btn" onclick="addQuickReply('I have cough and fatigue')">🤧 Cough & Fatigue</button>
+            <button class="quick-reply-btn" onclick="addQuickReply('I have nausea and vomiting')">🤢 Nausea & Vomiting</button>
+            <button class="quick-reply-btn" onclick="addQuickReply('I have skin rash')">🔴 Skin Rash</button>
+            <button class="quick-reply-btn" onclick="addQuickReply('I have joint pain')">🦴 Joint Pain</button>
+            <button class="quick-reply-btn" onclick="addQuickReply('I have weight loss and fatigue')">⚖ Weight Loss</button>
+        </div>
+
+        <!-- Input Area -->
+        <form id="chat-form" class="chat-input-area">
+            <textarea id="chat-input" class="form-control" rows="1" placeholder="Type your symptoms..." style="min-height: 44px; padding: 10px 14px;"></textarea>
+            <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Send</button>
+        </form>
+    </div>
+</div>
+
+<div class="card" style="padding: 16px 20px;">
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <span style="font-weight: 600; font-size: 0.9rem;">Need more options?</span>
+        <a href="/symptoms" class="btn btn-sm btn-secondary">📋 Use Symptom Picker</a>
+        <a href="/results" class="btn btn-sm btn-secondary">📊 View Latest Results</a>
+        <a href="/recommendations" class="btn btn-sm btn-secondary">💊 Recommendations</a>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="profile-avatar">👤</div>
+    <div class="card-header" style="text-align: center;">
+        <h2>User Profile</h2>
+        <p>Providing basic information helps improve prediction accuracy</p>
+    </div>
+
+    <form method="POST" action="/profile">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" class="form-control" 
+                       value="{{ profile.age if profile.age else '' }}" 
+                       placeholder="e.g., 30" min="0" max="120">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" class="form-control">
+                    <option value="">Select...</option>
+                    <option value="male" {% if profile.gender == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if profile.gender == 'female' %}selected{% endif %}>Female</option>
+                    <option value="other" {% if profile.gender == 'other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="existing_conditions">Existing Conditions (optional)</label>
+            <textarea id="existing_conditions" name="existing_conditions" class="form-control" 
+                      placeholder="e.g., Diabetes, Hypertension, Asthma">{{ profile.existing_conditions if profile.existing_conditions else '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="allergies">Allergies (optional)</label>
+            <textarea id="allergies" name="allergies" class="form-control" 
+                      placeholder="e.g., Penicillin, Pollen, Peanuts">{{ profile.allergies if profile.allergies else '' }}</textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1;">💾 Save Profile</button>
+            <a href="/chat" class="btn btn-secondary" style="flex: 1;">← Back to Chat</a>
+        </div>
+    </form>
+
+    {% if saved %}
+        <div style="margin-top: 16px; padding: 12px; background: #dcfce7; border: 1px solid #86efac; border-radius: 8px; text-align: center; color: #166534;">
+            ✅ Profile saved successfully!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

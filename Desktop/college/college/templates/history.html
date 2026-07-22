@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}History - Health Symptom Checker{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>📜 Consultation History</h2>
+        <p>Your previous symptom checks and predictions</p>
+    </div>
+
+    {% if history and history|length > 0 %}
+        {% for entry in history|reverse %}
+            <div class="history-item" onclick="window.location.href='/results?symptoms={{ entry.symptoms_input }}'">
+                <div class="history-date">
+                    🕐 {{ entry.timestamp }}
+                </div>
+                <div style="font-weight: 600; color: var(--primary);">
+                    {{ entry.predicted_disease }}
+                    <span style="font-weight: 400; font-size: 0.85rem; color: var(--text-light);">
+                        ({{ entry.confidence }}% confidence)
+                    </span>
+                </div>
+                <div class="history-symptoms">
+                    {% for symptom in entry.symptoms %}
+                        <span>{{ symptom }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        
+        <div style="margin-top: 16px;">
+            <button class="btn btn-secondary" onclick="if(confirm('Clear all history?')){ fetch('/clear_history', {method:'POST'}).then(()=>location.reload()); }">
+                🗑 Clear History
+            </button>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📜</div>
+            <h3>No History Yet</h3>
+            <p>Your consultation history will appear here after you check symptoms.</p>
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                <a href="/chat" class="btn btn-primary">💬 Start a Consultation</a>
+                <a href="/symptoms" class="btn btn-secondary">📋 Symptom Picker</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
